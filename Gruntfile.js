@@ -157,7 +157,7 @@ module.exports = function( grunt ) {
                   cleancss: true
                 },
                 files: {
-                  "build/main.css": ["lib/durandal/**/*.css", "css/**/*.css","app/styles/**/*.less", "!app/styles/main.less"],
+                  "build/main.css": ["lib/durandal/**/*.css", "bower_components/**/*.css", "bower_components/bootstrap/less/bootstrap.less", "css/**/*.css","app/styles/**/*.less", "!app/styles/main.less"],
                   "app/styles/inline.css": "app/styles/main.less"
                 }
               }
