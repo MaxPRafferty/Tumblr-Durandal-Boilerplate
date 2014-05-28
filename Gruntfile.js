@@ -135,8 +135,9 @@ module.exports = function( grunt ) {
                         '*/\n'
                 },
                 build: {
-                    src: 'build/app/main.js',
-                    dest: 'build/app/main-built.js'
+                    files: {
+                        'build/main-built.js': ['lib/require/require.js','/bower_components/**/*.js','/app/**/*.js']
+                    }
                 }
             },
             less: {
@@ -201,6 +202,6 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks('grunt-include-replace');
 
     grunt.registerTask('default', ['jshint', 'jasmine:dev', 'connect:dev:livereload', 'open:dev', 'watch:dev']);
-    grunt.registerTask('build', ['jshint', 'jasmine:dev', 'less:production', 'clean', 'copy', 'includereplace', 'durandal:main', 'uglify', 'jasmine:build', 'connect:build', 'open:build', 'watch:build']);
+    grunt.registerTask('build', ['jshint', 'jasmine:dev', 'clean', 'less:production', 'copy', 'includereplace', 'durandal:main', 'uglify', 'jasmine:build', 'connect:build', 'open:build', 'watch:build']);
 
 };

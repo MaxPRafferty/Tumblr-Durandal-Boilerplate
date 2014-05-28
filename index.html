@@ -29,6 +29,7 @@
                 document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
             }
         </script>
+        @@include('../styles/inline.css')
     </head>
     <body>
         <div id="applicationHost">
@@ -36,12 +37,12 @@
               <div class="message">
                   Durandal Starter Project
               </div>
-              @@include('sample.html', {"name": "Joe Bloggs"})
+              @@include('sample.html')
               <i class="icon-spinner icon-2x icon-spin active"></i>
           </div>
         </div>
 
         <script src="lib/require/require.js" data-main="app/main"></script>
-        <script src="main.js"></script>
+        <script src="main-built.js"></script>
     </body>
 </html>
