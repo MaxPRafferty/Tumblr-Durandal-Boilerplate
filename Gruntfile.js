@@ -51,10 +51,6 @@ module.exports = function( grunt ) {
                     src: 'bower_components/**/**',
                     dest: 'build/'
                 },
-                index: {
-                    src: 'index.html',
-                    dest: 'build/'
-                },
                 css: {
                     src: 'css/**',
                     dest: 'build/'
@@ -163,6 +159,17 @@ module.exports = function( grunt ) {
                 }
               }
             },
+            includereplace: {
+                all: {
+                    options: {
+                        includesDir: 'app/templates/'
+                    },
+                    // Files to perform replacements and includes with
+                    src: './index.html',
+                    // Destination directory to copy files to
+                    dest: 'build/'
+                }
+            },
             watch: {
                 build: {
                     files: ['build/**/*.js'],
@@ -191,8 +198,9 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-durandal');
     grunt.loadNpmTasks('grunt-wiredep');
+    grunt.loadNpmTasks('grunt-include-replace');
 
     grunt.registerTask('default', ['jshint', 'jasmine:dev', 'connect:dev:livereload', 'open:dev', 'watch:dev']);
-    grunt.registerTask('build', ['jshint', 'jasmine:dev', 'clean', 'copy', 'durandal:main', 'uglify', 'jasmine:build', 'connect:build', 'open:build', 'watch:build']);
+    grunt.registerTask('build', ['jshint', 'jasmine:dev', 'less:production', 'clean', 'copy', 'includereplace', 'durandal:main', 'uglify', 'jasmine:build', 'connect:build', 'open:build', 'watch:build']);
 
 };
