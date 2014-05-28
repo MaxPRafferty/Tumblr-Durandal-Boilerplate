@@ -143,10 +143,12 @@ module.exports = function( grunt ) {
             less: {
               development: {
                 options: {
-                  paths: ["assets/css"]
+                  paths: ["assets/css"],
+                  cleancss: true,
+                  compress: true
                 },
                 files: {
-                  "build/app/main.css": "app/styles/**/*.less"
+                  "build/main.css": ["lib/**/*.css", "css/**/*.css","app/styles/**/*.less"]
                 }
               },
               production: {
@@ -155,7 +157,7 @@ module.exports = function( grunt ) {
                   cleancss: true
                 },
                 files: {
-                  "build/app/main.css": ["app/styles/**/*.less", "!app/styles/main.less"],
+                  "build/main.css": ["lib/durandal/**/*.css", "css/**/*.css","app/styles/**/*.less", "!app/styles/main.less"],
                   "app/styles/inline.css": "app/styles/main.less"
                 }
               }
@@ -202,6 +204,6 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks('grunt-include-replace');
 
     grunt.registerTask('default', ['jshint', 'jasmine:dev', 'connect:dev:livereload', 'open:dev', 'watch:dev']);
-    grunt.registerTask('build', ['jshint', 'jasmine:dev', 'clean', 'less:production', 'copy', 'includereplace', 'durandal:main', 'uglify', 'jasmine:build', 'connect:build', 'open:build', 'watch:build']);
+    grunt.registerTask('build', ['jshint', 'jasmine:dev', 'clean', 'less:production', 'includereplace', 'durandal:main', 'uglify', 'jasmine:build', 'connect:build', 'open:build', 'watch:build']);
 
 };
