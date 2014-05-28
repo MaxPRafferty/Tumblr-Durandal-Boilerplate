@@ -4,3 +4,4 @@ node_modules/
 _SpecRunner.html
 .grunt/
 /build
+bower_components/

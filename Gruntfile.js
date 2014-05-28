@@ -14,12 +14,12 @@ module.exports = function( grunt ) {
     var requireConfig = {
         baseUrl: 'app/',
         paths: {
-            'jquery': '../lib/jquery/jquery-1.9.1',
-            'knockout': '../lib/knockout/knockout-2.3.0.debug',
-            'text': '../lib/require/text',
-            'durandal': '../lib/durandal/js',
-            'plugins': '../lib/durandal/js/plugins',
-            'transitions': '../lib/durandal/js/transitions'
+            'jquery': '../bower_components/jquery/jquery',
+            'knockout': '../bower_components/knockout.js/knockout',
+            'text': '../bower_components/requirejs-text/text',
+            'durandal': '../bower_components/durandal/js',
+            'plugins': '../bower_components/durandal/js/plugins',
+            'transitions': '../bower_components/durandal/js/transitions'
         }
     };
 
@@ -48,7 +48,7 @@ module.exports = function( grunt ) {
             },
             copy: {
                 lib: {
-                    src: 'lib/**/**',
+                    src: 'bower_components/**/**',
                     dest: 'build/'
                 },
                 index: {
@@ -70,7 +70,7 @@ module.exports = function( grunt ) {
             },
             durandal: {
                 main: {
-                    src: ['app/**/*.*', 'lib/durandal/**/*.js'],
+                    src: ['app/**/*.*', 'bower_components/durandal/**/*.js'],
                     options: {
                         name: '../lib/require/almond-custom',
                         baseUrl: requireConfig.baseUrl,
@@ -104,6 +104,29 @@ module.exports = function( grunt ) {
                         }
                     }
                 }
+            },
+            bowerInstall: {
+              target: {
+
+                // Point to the files that should be updated when
+                // you run `grunt bower-install`
+                src: [
+                  'app/views/**/*.html',   // .html support...
+                  'app/views/**/*.jade',   // .jade support...
+                  'app/styles/main.scss',  // .scss & .sass support...
+                  'app/config.yml'         // and .yml & .yaml support out of the box!
+                ],
+
+                // Optional:
+                // ---------
+                cwd: '',
+                dependencies: true,
+                devDependencies: false,
+                exclude: [],
+                fileTypes: {},
+                ignorePath: '',
+                overrides: {}
+              }
             },
             jshint: {
                 all: ['Gruntfile.js', 'app/**/*.js', 'test/specs/**/*.js']
@@ -148,6 +171,7 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-durandal');
+    grunt.loadNpmTasks('grunt-wiredep');
 
     grunt.registerTask('default', ['jshint', 'jasmine:dev', 'connect:dev:livereload', 'open:dev', 'watch:dev']);
     grunt.registerTask('build', ['jshint', 'jasmine:dev', 'clean', 'copy', 'durandal:main', 'uglify', 'jasmine:build', 'connect:build', 'open:build', 'watch:build']);
