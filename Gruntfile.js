@@ -107,7 +107,6 @@ module.exports = function( grunt ) {
             },
             bowerInstall: {
               target: {
-
                 // Point to the files that should be updated when
                 // you run `grunt bower-install`
                 src: [
@@ -144,7 +143,26 @@ module.exports = function( grunt ) {
                     dest: 'build/app/main-built.js'
                 }
             },
-
+            less: {
+              development: {
+                options: {
+                  paths: ["assets/css"]
+                },
+                files: {
+                  "build/app/main.css": "app/styles/**/*.less"
+                }
+              },
+              production: {
+                options: {
+                  paths: ["assets/css"],
+                  cleancss: true
+                },
+                files: {
+                  "build/app/main.css": ["app/styles/**/*.less", "!app/styles/main.less"],
+                  "app/styles/inline.css": "app/styles/main.less"
+                }
+              }
+            },
             watch: {
                 build: {
                     files: ['build/**/*.js'],
@@ -167,6 +185,7 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-open');
